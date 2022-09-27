@@ -62,42 +62,65 @@ public class Echiquier {
 
     public int[] meilleurPosition() {
         int[] res = new int[2];
-        int max = 0;
-        int nbMenacees = 0;
+        int nombreMenaceeMax = this.taille * this.taille + 1;
+
         for (int i = 0 ; i < this.taille ; i++) {
             for (int j = 0 ; j < this.taille ; j++) {
                 if (this.echiquier[i][j].getTypeOccupation() == this.libre) {
-                    nbMenacees = this.nombreMenacees(i, j);
-                    if (nbMenacees > max) {
-                        max = nbMenacees;
+                    int nombreMenacee = this.compterNbCaseMenacee(i, j);
+                    if (nombreMenacee < nombreMenaceeMax) {
+                        nombreMenaceeMax = nombreMenacee;
                         res[0] = i;
                         res[1] = j;
                     }
                 }
             }
         }
+
         return res;
     }
 
-    public int nombreMenacees(int x, int y) {
+    public int compterNbCaseMenacee(int x, int y) {
         int res = 0;
+        int resTemp = 0;
+        Cellule[][] echiquierBis = new Cellule[this.taille][this.taille];
+
         for (int i = 0 ; i < this.taille ; i++) {
-            if (this.echiquier[i][y].getTypeOccupation() == this.menacee) {
-                res++;
-            }
-            if (this.echiquier[x][i].getTypeOccupation() == this.menacee) {
-                res++;
+            for (int j = 0 ; j < this.taille ; j++) {
+                echiquierBis[i][j] = new Cellule(i, j, this.echiquier[i][j].getTypeOccupation());
             }
         }
+
+        for (int i = 0 ; i < this.taille ; i++) {
+            for (int j = 0 ; j < this.taille ; j++) {
+                if (echiquierBis[i][j].getTypeOccupation() == this.menacee) resTemp++;
+            }
+        }
+
+        for (int i = 0 ; i < this.taille ; i++) {
+            echiquierBis[i][y].setTypeOccupation(this.menacee);
+            echiquierBis[x][i].setTypeOccupation(this.menacee);
+        }
+
         for (int i = 0 ; i < this.taille ; i++) {
             for (int j = 0 ; j < this.taille ; j++) {
                 if (i + j == x + y || i - j == x - y) {
-                    if (this.echiquier[i][j].getTypeOccupation() == this.menacee) {
-                        res++;
-                    }
+                    echiquierBis[i][j].setTypeOccupation(this.menacee);
                 }
             }
         }
+
+        echiquierBis[x][y].setTypeOccupation(this.reine);
+
+        for (int i = 0 ; i < this.taille ; i++) {
+            for (int j = 0 ; j < this.taille ; j++) {
+                if (echiquierBis[i][j].getTypeOccupation() == this.menacee) res++;
+            }
+        }
+
+        res -= resTemp;
+
         return res;
     }
+
 }
