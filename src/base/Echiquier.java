@@ -151,4 +151,19 @@ public class Echiquier {
         return res;
     }
 
+    public boolean isFull() {
+        boolean res = true;
+
+        for (int i = 0 ; i < this.taille ; i++) {
+            for (int j = 0 ; j < this.taille ; j++) {
+                if (this.echiquier[i][j].getTypeOccupation() == this.libre) {
+                    res = false;
+                    break;
+                }
+            }
+        }
+
+        return res;
+    }
+
 }

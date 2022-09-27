@@ -18,7 +18,7 @@ public class Main {
 
     public static void algoEchiquierDeux() {
         Echiquier e = new Echiquier(8);
-        for (int i = 0 ; i < 100 ; i++) {
+        while (!e.isFull()) {
             e.placerReine(e.meilleurPosition()[0], e.meilleurPosition()[1]);
         }
         System.out.println(e);
