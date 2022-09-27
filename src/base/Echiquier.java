@@ -2,12 +2,12 @@ package base;
 
 public class Echiquier {
 
-    private Cellule[][] echiquier;
-    private int taille;
+    private final Cellule[][] echiquier;
+    private final int taille;
 
-    private char libre = '-';
-    private char reine = 'R';
-    private char menacee = '*';
+    private final char libre = '-';
+    private final char reine = 'R';
+    private final char menacee = '*';
 
     public Echiquier(int taille) {
         this.taille = taille;
@@ -49,15 +49,15 @@ public class Echiquier {
         }
     }
     public String toString() {
-        String res = "";
+        StringBuilder res = new StringBuilder();
 
         for (int i = 0 ; i < this.taille ; i++) {
             for (int j = 0; j < this.taille; j++) {
-                res += this.echiquier[i][j].getTypeOccupation() + " ";
+                res.append(this.echiquier[i][j].getTypeOccupation()).append(" ");
             }
-            res += "\n";
+            res.append("\n");
         }
-        return res;
+        return res.toString();
     }
 
     public int[] meilleurPosition() {
