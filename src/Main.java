@@ -9,7 +9,14 @@ public class Main {
     public static void algoEchiquierUn() {
         Echiquier e = new Echiquier(8);
         System.out.println(e);
-        e.placerReine(4, 2);
+        System.out.println(e.meilleurPosition()[0]);
+        System.out.println(e.meilleurPosition()[1]);
         System.out.println(e);
+
+        for (int i = 0 ; i < 50 ; i++) {
+            e.placerReine(e.meilleurPosition()[0], e.meilleurPosition()[1]);
+        }
+        System.out.println(e);
+
     }
 }
