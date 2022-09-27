@@ -32,20 +32,19 @@ public class Echiquier {
         if (this.echiquier[x][y].getTypeOccupation() == this.libre) {
 
             for (int i = 0 ; i < this.taille ; i++) {
-                this.echiquier[i][y].setTypeOccupation(this.menacee);
-                this.echiquier[x][i].setTypeOccupation(this.menacee);
+                this.modifierCellule(i, y, this.menacee);
+                this.modifierCellule(x, i, this.menacee);
             }
 
             for (int i = 0 ; i < this.taille ; i++) {
                 for (int j = 0 ; j < this.taille ; j++) {
                     if (i + j == x + y || i - j == x - y) {
-                        this.echiquier[i][j].setTypeOccupation(this.menacee);
+                        this.modifierCellule(i, j, this.menacee);
                     }
                 }
             }
 
-            this.echiquier[x][y].setTypeOccupation(this.reine);
-
+            this.modifierCellule(x, y, this.reine);
         }
     }
     public String toString() {
