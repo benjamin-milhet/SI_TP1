@@ -24,11 +24,39 @@ public class Echiquier {
         }
     }
 
-    public void modifierCellule(int i, int j, char valeur) {
-        this.echiquier[i][j].setTypeOccupation(valeur);
+    public void modifierCellule(int x, int y, char valeur) {
+        this.echiquier[x][y].setTypeOccupation(valeur);
     }
 
-    public void placerReine(int i, int j) {
-        
+    public void placerReine(int x, int y) {
+        if (this.echiquier[x][y].getTypeOccupation() == this.libre) {
+
+            for (int i = 0 ; i < this.taille ; i++) {
+                this.echiquier[i][y].setTypeOccupation(this.menacee);
+                this.echiquier[x][i].setTypeOccupation(this.menacee);
+            }
+
+            for (int i = 0 ; i < this.taille ; i++) {
+                for (int j = 0 ; j < this.taille ; j++) {
+                    if (i + j == x + y || i - j == x - y) {
+                        this.echiquier[i][j].setTypeOccupation(this.menacee);
+                    }
+                }
+            }
+
+            this.echiquier[x][y].setTypeOccupation(this.reine);
+
+        }
+    }
+    public String toString() {
+        String res = "";
+
+        for (int i = 0 ; i < this.taille ; i++) {
+            for (int j = 0; j < this.taille; j++) {
+                res += this.echiquier[i][j].getTypeOccupation() + " ";
+            }
+            res += "\n";
+        }
+        return res;
     }
 }
