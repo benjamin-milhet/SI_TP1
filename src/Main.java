@@ -23,6 +23,12 @@ public class Main {
         }
         System.out.println(e);
 
+        System.out.println("Il y a " + e.compterNbReine() + " Reine(s)");
 
+        System.out.println("Coordonee des Reines : ");
+
+        for (int i = 0 ; i < e.compterNbReine() ; i++) {
+            System.out.println("(" + e.getCoordonneeReines()[i][0] + " , " + e.getCoordonneeReines()[i][1] + ")");
+        }
     }
 }

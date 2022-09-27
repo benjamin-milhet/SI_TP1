@@ -123,4 +123,33 @@ public class Echiquier {
         return res;
     }
 
+    public int compterNbReine() {
+        int res = 0;
+
+        for (int i = 0 ; i < this.taille ; i++) {
+            for (int j = 0 ; j < this.taille ; j++) {
+                if (this.echiquier[i][j].getTypeOccupation() == this.reine) res++;
+            }
+        }
+
+        return res;
+    }
+
+    public int[][] getCoordonneeReines() {
+        int[][] res = new int[this.compterNbReine()][2];
+        int compteur = 0;
+
+        for (int i = 0 ; i < this.taille ; i++) {
+            for (int j = 0 ; j < this.taille ; j++) {
+                if (this.echiquier[i][j].getTypeOccupation() == this.reine) {
+                    res[compteur][0] = i;
+                    res[compteur][1] = j;
+                    compteur++;
+                }
+            }
+        }
+
+        return res;
+    }
+
 }
