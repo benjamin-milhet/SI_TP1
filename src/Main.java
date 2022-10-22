@@ -7,6 +7,7 @@ public class Main {
         algoEchiquierDeux();
     }
 
+    // Exercice 1 - Créer l'échiquier et placer une reine
     public static void algoEchiquierUn() {
         Echiquier e = new Echiquier(8);
         System.out.println(e);
@@ -16,6 +17,7 @@ public class Main {
 
     }
 
+    // Exercice 2 - Placer toutes les reiness
     public static void algoEchiquierDeux() {
         Echiquier e = new Echiquier(8);
         while (!e.isFull()) {
